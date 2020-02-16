@@ -1,8 +1,8 @@
 # ace-Plugin.js
-Plugin for Tiddlywiki classic that provides the ace.js editor
+This plugin provides the ace.js editor for Tiddlywiki classic.
+This plugin is under development, instructions can be found in the plugin documentation.
 
-This plugin is under development, more information and a description will follow.
-Basic info can be found in the TWc.
+You can try it here: https://nwokido.github.io/ace-Plugin.js/.
 
 Any comments are appreciated!!!
 
