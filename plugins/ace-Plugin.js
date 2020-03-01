@@ -1,6 +1,6 @@
 /***
 |Name|ace-Plugin.js |
-|Version|1.4.8.4 |
+|Version|1.4.8.5 |
 |Description|ace.js for Tiddlywiki |
 |Status|EXPERIMENTAL - SUBJECT TO CHANGE |
 !!!Documentation
@@ -28,6 +28,7 @@ chkHttpReadOnly: false;
 <<<
 !!!Configuration
 <<<
+!!!Modify EditTemplate
 Modify the default EditTemplate code:
 {{{
 <div class='editor' macro='edit text'></div>
@@ -38,19 +39,28 @@ Modify the default code to:
 <div id='aceViewer' contenteditable='true' spellcheck='true'></div>
 }}}
 
+!!!Modify ToolBarCommands
 Modify ToolbarCommands, it must contain aceEdit, like:
 |~ViewToolbar|copyTiddler deleteTiddler closeTiddler intelliTagsEdit closeOthers +editTiddler aceEdit > fields syncing permalink references jump|
 |~EditToolbar|+saveTiddler -cancelTiddler deleteTiddler|
 
-<<option chkEscapeScriptTags >> Escape script tags when edited with ace-Plugin.js and InlineJavascriptPlugin.
-
+!!!Choose to escape script tags when editing script code
+<<option chkEscapeScriptTags>> Escape script tags when edited with ace-Plugin.js and InlineJavascriptPlugin.
 Or add the following code to a tiddler that is tagged with systemConfig.
 {{{
   config.options.chkEscapeScriptTags = true; 
 }}}
+
+!!!Set the heigth of the edit box
+<<option txtEditBoxLines>> Set the heigth of edit box in number of lines.
+Or add the following code to a tiddler that is tagged with systemConfig.
+{{{
+  config.options.txtEditBoxLines = 50; 
+}}}
 <<<
 !!!Revisions
 <<<
+23-02-2020 1.4.8.5 Added functionality to keep the last cursor position and the size of the edit box can be set
 23-02-2020 1.4.8.4 Improved the configuration instructions, fixed the loss of field values, Reto Stauss thanks for reporting
 16-02-2020 1.4.8.3 Added information for opening menu's
 08-02-2020 1.4.8.2 Resolved a plugin conflict with snippet insertion
@@ -211,7 +221,7 @@ ace.define("ace/ext/menu_tools/overlay_page",["require","exports","module","ace/
 //{{{
 
 /* Code filename: ace-Macro-Source */
-config.commands.aceEdit={text:"aceEdit",tooltip:"Edit tiddler with ace.js"},config.commands.aceDone={},config.commands.aceDone.handler=function(e,t,i){console.log("Ace is done event",e),console.log("Ace is done src",t),console.log("Ace is done title",i);let c=ace.edit("aceViewer"),s=config.options.chkEscapeScriptTags?function(e){const t=new RegExp("// <script","g"),i=new RegExp("// </script","g");return e.replace(t,"<script").replace(i,"</script")}(c.getSession().getValue()):c.getSession().getValue(),o=story.saveTiddler(i,e.shiftKey);const n=store.getTiddler(o),a=n.tags,d=n.fields;store.saveTiddler(o,o,s,config.options.txtUserName,new Date,a,d),console.log("Saved title",o,i)},config.commands.aceEdit.handler=function(e,t,i){config.commands.editTiddler.handler.call(this,e,t,i),jQuery("a[commandname='saveTiddler']").text("aceDone").attr({title:"Close ace.js edited tiddler"}).attr({commandname:"aceDone"}),jQuery("#acehidetweditor").hide(),jQuery("#aceViewer").css("height","1400px").css("width","100%").css("font-size","12pt"),ace.config.set("basePath","ace");var c=ace.edit("aceViewer");c.setTheme("ace/theme/monokai"),c.session.setMode("ace/mode/javascript"),c.setHighlightActiveLine(!0),c.setOptions({tabSize:2,enableBasicAutocompletion:!0,enableSnippets:!0,enableLiveAutocompletion:!0,highlightSelectedWord:!0}),c.getSession().setValue(config.options.chkEscapeScriptTags?function(e){const t=new RegExp("<script","g"),i=new RegExp("</script","g");return e.replace(t,"// <script").replace(i,"// </script")}(store.getTiddlerText(i)):store.getTiddlerText(i)),c.getSession().setUseWrapMode(!0),c.focus()};
+config.commands.aceEdit={text:"aceEdit",tooltip:"Edit tiddler with ace.js"},config.commands.aceDone={},config.commands.aceDone.handler=function(e,t,o){console.log("Ace is done event",e),console.log("Ace is done src",t),console.log("Ace is done title",o);let i=ace.edit("aceViewer"),s=config.options.chkEscapeScriptTags?function(e){const t=new RegExp("// <script","g"),o=new RegExp("// </script","g");return e.replace(t,"<script").replace(o,"</script")}(i.getSession().getValue()):i.getSession().getValue(),c=story.saveTiddler(o,e.shiftKey);const n=store.getTiddler(c),a=n.tags,l=n.fields;store.saveTiddler(c,c,s,config.options.txtUserName,new Date,a,l),console.log("Saved title",c,o);let r=i.selection.getCursor();store.setValue(c,"acerow",r.row),store.setValue(c,"acecolumn",r.column),console.log(r)},config.commands.aceEdit.handler=function(e,t,o){console.clear(),console.log("aceEdit is event clicked: ",e),console.log("aceEdit src: ",t),console.log("aceEdit title: ",o),config.commands.editTiddler.handler.call(this,e,t,o),jQuery("a[commandname='saveTiddler']").text("aceDone").attr({title:"Close ace.js edited tiddler"}).attr({commandname:"aceDone"}),jQuery("#acehidetweditor").hide(),jQuery("#aceViewer").css("width","100%").css("font-size","12pt"),ace.config.set("basePath","ace");let i=isNaN(parseInt(config.options.txtEditBoxLines))?30:parseInt(config.options.txtEditBoxLines);console.log(parseInt(config.options.txtEditBoxLines));var s=ace.edit("aceViewer");s.setTheme("ace/theme/monokai"),s.session.setMode("ace/mode/javascript"),s.setHighlightActiveLine(!0),s.setOptions({tabSize:2,enableBasicAutocompletion:!0,enableSnippets:!0,enableLiveAutocompletion:!0,highlightSelectedWord:!0,autoScrollEditorIntoView:!0,minLines:20,maxLines:i}),s.getSession().setValue(config.options.chkEscapeScriptTags?function(e){const t=new RegExp("<script","g"),o=new RegExp("</script","g");return e.replace(t,"// <script").replace(o,"// </script")}(store.getTiddlerText(o)):store.getTiddlerText(o)),s.getSession().setUseWrapMode(!0),s.focus(),s.resize(!0);let c=parseInt(store.getValue(o,"acecolumn",0)),n=parseInt(store.getValue(o,"acerow",0))+1;s.gotoLine(n,c,!0)};
 //}}}
 //{{{
 
