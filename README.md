@@ -4,6 +4,6 @@ This plugin is under development, instructions can be found in the plugin docume
 
 You can try it here: https://nwokido.github.io/ace-Plugin.js/.
 
-Any comments are appreciated!!!
+Comments are appreciated!!!
 
 Have a nice day, Okido
