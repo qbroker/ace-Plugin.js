@@ -526,7 +526,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="ColorPalette" modifier="Okido" created="202003131422" modified="202003131430" acecolumn="11" acerow="15">
+<div title="ColorPalette" modifier="Okido" created="202003131422" modified="202003131430" acerow="15" acecolumn="11">
 <pre>!Primary colors are modified
 Background: #fff
 Foreground: #000
@@ -560,7 +560,7 @@ Error: #f88
 &lt;!--}}}--&gt;
 </pre>
 </div>
-<div title="Example" modifier="Okido" created="202002051942" modified="202003141304" tags="example" changecount="10" acecolumn="0" acerow="0">
+<div title="Example" modifier="Okido" created="202002051942" modified="202003141304" tags="example" acerow="0" acecolumn="0" changecount="10">
 <pre>&lt;script show&gt;
 
   /* jshint asi:true */
@@ -684,7 +684,7 @@ if (typeof(wikifyPlainText)==&quot;undefined&quot;) window.wikifyPlainText=funct
 if (typeof($)=='undefined') { function $(id) { return document.getElementById(id.replace(/^#/,'')); } }
 //}}}</pre>
 </div>
-<div title="MainMenu" modifier="Okido" created="202002021925" modified="202003131411" acecolumn="49" acerow="5">
+<div title="MainMenu" modifier="Okido" created="202002021925" modified="202003131411" acerow="5" acecolumn="49">
 <pre>[[Example]]
 [[ace-Plugin.js]]
 [[ToolbarCommands]]
@@ -693,7 +693,7 @@ if (typeof($)=='undefined') { function $(id) { return document.getElementById(id
 [[Github|https://github.com/nwOkido/ace-Plugin.js]]
 </pre>
 </div>
-<div title="SiteSubtitle" creator="Okido" modifier="Okido" created="202005020912" modified="202005020912" changecount="6" acerow="0" acecolumn="4">
+<div title="SiteSubtitle" creator="Okido" modifier="Okido" created="202005020912" modified="202005020912" acecolumn="4" acerow="0" changecount="6">
 <pre>for easy Javascript editing inside the &lt;nowiki&gt;TWc&lt;/nowiki&gt; framework</pre>
 </div>
 <div title="SiteTitle" modifier="&quot;Okido&quot;" created="202002021921" modified="202002021921">
@@ -702,20 +702,20 @@ if (typeof($)=='undefined') { function $(id) { return document.getElementById(id
 <div title="SystemSettings" modifier="Okido" created="202001061903" modified="202002051940" tags="systemsettings">
 <pre>chkHttpReadOnly: false;</pre>
 </div>
-<div title="ToolbarCommands" modifier="&quot;Okido&quot;" created="202002021915" modified="202002021915">
+<div title="ToolbarCommands" modifier="Okido" created="202002021915" modified="202005090801" changecount="1">
 <pre>|~ViewToolbar|closeTiddler closeOthers +editTiddler aceEdit &gt; fields permalink references jump|
-|~EditToolbar|+saveTiddler -cancelTiddler deleteTiddler|</pre>
+|~EditToolbar|+saveTiddler aceSave -cancelTiddler deleteTiddler|</pre>
 </div>
-<div title="ace-Plugin.js" modifier="Okido" created="202002031756" modified="202005020914" tags="systemConfig aceplugin" acecolumn="5" acerow="254" changecount="5">
+<div title="ace-Plugin.js" modifier="Okido" created="202002031756" modified="202005090801" tags="systemConfig aceplugin" changecount="6" acerow="254" acecolumn="5">
 <pre>/***
 |Name|ace-Plugin.js |
-|Version|1.4.10.10 |
+|Version|1.4.10.12 |
 |Description|ace.js for &lt;nowiki&gt;TWc&lt;/nowiki&gt; framework |
 |Status|EXPERIMENTAL - SUBJECT TO CHANGE - You need a modern browser or nw.js|
 !!!Documentation
 &lt;&lt;&lt;
-This plugin gives you the ace.js editor in Tiddlywiki classic.
-Versioning numbering follows ace.js versioning followed by one digit for the plugin version.
+This plugin gives you the ace.js editor in Tiddlywiki classic framework.
+Versioning numbering follows ace.js versioning followed by number for the plugin version.
 ''Key definition:''
 Open key command menu: F1
 Search: CTRL F
@@ -750,9 +750,9 @@ Modify the default code to:
 }}}
 
 !!!Modify ToolBarCommands
-Modify ToolbarCommands, it must contain aceEdit, like:
+Modify ToolbarCommands, it must contain aceEdit and aceSave, like:
 |~ViewToolbar|copyTiddler deleteTiddler closeTiddler intelliTagsEdit closeOthers +editTiddler aceEdit &gt; fields syncing permalink references jump|
-|~EditToolbar|+saveTiddler -cancelTiddler deleteTiddler|
+|~EditToolbar|+saveTiddler aceSave -cancelTiddler deleteTiddler|
 
 !!!Choose to escape script tags when editing script code
 &lt;&lt;option chkEscapeScriptTags&gt;&gt; Escape script tags when edited with ace-Plugin.js and InlineJavascriptPlugin.
@@ -781,6 +781,8 @@ Or add the following code to a tiddler that is tagged with systemConfig.
 &lt;&lt;&lt;
 !!!Revisions
 &lt;&lt;&lt;
+08-05-2020 1.4.10.12 Changed the button handlers, to improve speed and to prevent handler conflicts, make sure that aceSave is added to [[ToolbarCommands]]
+04-05-2020 1.4.10.11 Prevented that after aceDone the code is rendered twice
 02-05-2020 1.4.10.10 Updated template, settings were lost
 18-04-2020 1.4.10.9 Updated ace.js to 1.4.10
 10-04-2020 1.4.8.9 Improved performance when switching from edit mode to presentation style, cursor position is stored
@@ -948,7 +950,7 @@ ace.define(&quot;ace/ext/menu_tools/overlay_page&quot;,[&quot;require&quot;,&quo
 //{{{
 
 /* Code filename: ace-Macro-Source */
-&quot;use strict&quot;;config.commands.aceEdit={text:&quot;aceEdit&quot;,tooltip:&quot;Edit tiddler with ace.js&quot;},config.commands.aceEdit.debug=!1,config.commands.aceDone={},config.commands.aceDone.handler=function(e,t,o){const n=config.commands.aceEdit.debug,i=CSS.escape(o.replace(/ /g,&quot;_&quot;))+&quot;aceViewer&quot;;let s=ace.edit(i),c=s.getSession().getValue(),a=config.options.chkEscapeScriptTags?function(e){const t=new RegExp(&quot;// &lt;script&quot;,&quot;g&quot;),o=new RegExp(&quot;// &lt;/script&quot;,&quot;g&quot;);return e.replace(t,&quot;&lt;script&quot;).replace(o,&quot;&lt;/script&quot;)}(c):c,l=story.saveTiddler(o,e.shiftKey);const d=s.getFontSize();config.options.txtaceEditFontSize=d;let r=s.selection.getCursor();const g=store.getTiddler(l),p=g.tags;let m=g.fields;m.acerow=r.row.toString(),m.acecolumn=r.column.toString(),store.saveTiddler(l,l,a,config.options.txtUserName,new Date,p,m),n&amp;&amp;console.log(&quot;Fields: &quot;,JSON.stringify(m)),n&amp;&amp;console.log(&quot;Done event: &quot;,e),n&amp;&amp;console.log(&quot;Done src: &quot;,t),n&amp;&amp;console.log(&quot;Done title: &quot;,o),n&amp;&amp;console.log(&quot;Done sessionTarget: &quot;,i),n&amp;&amp;console.log(&quot;NewTitle: &quot;,l),n&amp;&amp;console.log(&quot;thisTid: &quot;,g),n&amp;&amp;console.log(&quot;Saved title: &quot;,l),n&amp;&amp;console.log(&quot;Cursor position: &quot;,r),n&amp;&amp;console.log(&quot;Fontsize: &quot;,d),n&amp;&amp;console.log(&quot;fields: &quot;,JSON.stringify(m))},config.commands.aceEdit.handler=function(e,t,o){const n=config.commands.aceEdit.debug,i=config.options.txtaceEditFontSize||16,s=config.options.txtaceEditSoftTab||&quot;2&quot;,c=&quot;#&quot;+CSS.escape(`tiddler${o.replace(/ /g,&quot;_&quot;)}`)+&quot; &gt; #acehidetweditor&quot;,a=CSS.escape(o.replace(/ /g,&quot;_&quot;))+&quot;aceViewer&quot;;config.commands.editTiddler.handler.call(this,e,t,o);const l=jQuery(&quot;#&quot;+CSS.escape(`tiddler${o.replace(/ /g,&quot;_&quot;)}`)).find(&quot;.toolbar&quot;).find('a[commandname=&quot;saveTiddler&quot;]');l.text(&quot;aceDone&quot;).attr({title:&quot;Close ace.js edited tiddler&quot;}).attr({commandname:&quot;aceDone&quot;}),jQuery(c).hide().empty(),jQuery(&quot;#&quot;+CSS.escape(`tiddler${o.replace(/ /g,&quot;_&quot;)}`)+&quot; &gt; #aceViewer&quot;).attr(&quot;id&quot;,a);const d=&quot;#&quot;+CSS.escape(a);jQuery(d).css(&quot;width&quot;,&quot;100%&quot;).css(&quot;height&quot;,&quot;30px&quot;),n&amp;&amp;console.log(&quot;Edit event: &quot;,e),n&amp;&amp;console.log(&quot;Edit src: &quot;,t),n&amp;&amp;console.log(&quot;Edit title: &quot;,o),n&amp;&amp;console.log(&quot;Edit sessionTarget: &quot;,a),n&amp;&amp;console.log(&quot;Edit sessionTargetId: &quot;,d),n&amp;&amp;console.log(&quot;Edit buttonChange: &quot;,l),n&amp;&amp;console.log(&quot;Edit fontsize: &quot;,i),ace.config.set(&quot;basePath&quot;,&quot;ace&quot;);let r=isNaN(parseInt(config.options.txtaceEditBoxLines))?30:parseInt(config.options.txtaceEditBoxLines);n&amp;&amp;console.log(&quot;No edit lines: &quot;,parseInt(config.options.txtaceEditBoxLines));var g=ace.edit(a);g.setTheme(&quot;ace/theme/monokai&quot;),g.session.setMode(&quot;ace/mode/javascript&quot;),ace.require(&quot;ace/ext/settings_menu&quot;).init(g),g.setHighlightActiveLine(!0),g.setShowPrintMargin(!1),g.setOptions({enableBasicAutocompletion:!0,enableSnippets:!0,enableLiveAutocompletion:!0,highlightSelectedWord:!0,autoScrollEditorIntoView:!0,minLines:20,maxLines:r}),g.getSession().setTabSize(parseInt(s)),g.getSession().setUseSoftTabs(!0),g.getSession().setValue(config.options.chkEscapeScriptTags?function(e){const t=new RegExp(&quot;&lt;script&quot;,&quot;g&quot;),o=new RegExp(&quot;&lt;/script&quot;,&quot;g&quot;);return e.replace(t,&quot;// &lt;script&quot;).replace(o,&quot;// &lt;/script&quot;)}(store.getTiddlerText(o)):store.getTiddlerText(o)),g.getSession().setUseWrapMode(!0),g.focus(),g.resize(!0),g.scrollToLine(30,!0,!0,function(){}),g.setFontSize(i);let p=parseInt(store.getValue(o,&quot;acecolumn&quot;,0)),m=parseInt(store.getValue(o,&quot;acerow&quot;,0))+1;g.gotoLine(m,p,!0),g.commands.addCommand({name:&quot;showSettingsMenu&quot;,bindKey:&quot;F2&quot;,exec:function(e){e.showSettingsMenu()},readOnly:!0}),g.commands.addCommand({name:&quot;FontSizePlus&quot;,bindKey:&quot;Ctrl-+&quot;,exec:function(e){const t=parseInt(e.getFontSize())+1;e.setFontSize(t),config.options.txtaceEditFontSize=t,n&amp;&amp;console.log(&quot;font+: &quot;,e.getFontSize())},readOnly:!0}),g.commands.addCommand({name:&quot;FontSizeMin&quot;,bindKey:&quot;Ctrl--&quot;,exec:function(e){const t=parseInt(e.getFontSize())-1;e.setFontSize(t),config.options.txtaceEditFontSize=t,n&amp;&amp;console.log(&quot;font-: &quot;,e.getFontSize())},readOnly:!0})};
+&quot;use strict&quot;;config.commands.aceEdit={text:&quot;aceEdit&quot;,tooltip:&quot;Edit tiddler with ace.js&quot;},config.commands.aceSave={text:&quot;aceSave&quot;,tooltip:&quot;Save the tiddler with ace.js&quot;},config.commands.aceSave.handler=function(e,t,o){config.commands.aceSave.debug=!1;const i=config.commands.aceSave.debug;i&amp;&amp;console.log(&quot;Start aceSaver&quot;);const n=CSS.escape(o.replace(/ /g,&quot;_&quot;))+&quot;aceViewer&quot;,s=&quot;#&quot;+CSS.escape(n);let c=ace.edit(n).getSession().getValue(),a=config.options.chkEscapeScriptTags?function(e){const t=new RegExp(&quot;// &lt;script&quot;,&quot;g&quot;),o=new RegExp(&quot;// &lt;/script&quot;,&quot;g&quot;);return e.replace(t,&quot;&lt;script&quot;).replace(o,&quot;&lt;/script&quot;)}(c):c,r=jQuery(&quot;#acehidetweditor &gt; fieldset &gt; div &gt; textarea&quot;).val();jQuery(&quot;#acehidetweditor &gt; fieldset &gt; div &gt; textarea&quot;).val(a);const d=story.saveTiddler(o,e.shiftKey);return i&amp;&amp;console.log(&quot;aceSaver event&quot;,JSON.stringify(e)),i&amp;&amp;console.log(&quot;aceSaver src&quot;,JSON.stringify(t)),i&amp;&amp;console.log(&quot;aceSaver title&quot;,JSON.stringify(o)),i&amp;&amp;console.log(&quot;aceSaver newTitle&quot;,d),i&amp;&amp;console.log(&quot;aceSaver sessionTargetId&quot;,JSON.stringify(s)),i&amp;&amp;console.log(&quot;aceSaver tidValue&quot;,JSON.stringify(a)),i&amp;&amp;console.log(&quot;aceSaver original Value&quot;,JSON.stringify(r)),d&amp;&amp;story.displayTiddler(null,d),!1},config.commands.aceEdit.handler=function(e,t,o){config.commands.aceEdit.debug=!1;const i=config.commands.aceEdit.debug,n=config.options.txtaceEditFontSize||16,s=config.options.txtaceEditSoftTab||&quot;2&quot;,c=&quot;#&quot;+CSS.escape(`tiddler${o.replace(/ /g,&quot;_&quot;)}`)+&quot; &gt; #acehidetweditor&quot;,a=CSS.escape(o.replace(/ /g,&quot;_&quot;))+&quot;aceViewer&quot;;config.commands.editTiddler.handler.call(this,e,t,o),jQuery(&quot;#&quot;+CSS.escape(`tiddler${o.replace(/ /g,&quot;_&quot;)}`)).find(&quot;.toolbar&quot;).find('a[commandname=&quot;saveTiddler&quot;]').hide(),jQuery(c).hide(),jQuery(&quot;#&quot;+CSS.escape(`tiddler${o.replace(/ /g,&quot;_&quot;)}`)+&quot; &gt; #aceViewer&quot;).attr(&quot;id&quot;,a);const r=&quot;#&quot;+CSS.escape(a);jQuery(r).css(&quot;width&quot;,&quot;100%&quot;).css(&quot;height&quot;,&quot;30px&quot;),i&amp;&amp;console.log(&quot;Edit event: &quot;,e),i&amp;&amp;console.log(&quot;Edit src: &quot;,t),i&amp;&amp;console.log(&quot;Edit title: &quot;,o),i&amp;&amp;console.log(&quot;Edit sessionTarget: &quot;,a),i&amp;&amp;console.log(&quot;Edit sessionTargetId: &quot;,r),i&amp;&amp;console.log(&quot;Edit fontsize: &quot;,n),ace.config.set(&quot;basePath&quot;,&quot;ace&quot;);let d=isNaN(parseInt(config.options.txtaceEditBoxLines))?30:parseInt(config.options.txtaceEditBoxLines);i&amp;&amp;console.log(&quot;No edit lines: &quot;,parseInt(config.options.txtaceEditBoxLines));var l=ace.edit(a);l.setTheme(&quot;ace/theme/monokai&quot;),l.session.setMode(&quot;ace/mode/javascript&quot;),ace.require(&quot;ace/ext/settings_menu&quot;).init(l),l.setHighlightActiveLine(!0),l.setShowPrintMargin(!1),l.setOptions({enableBasicAutocompletion:!0,enableSnippets:!0,enableLiveAutocompletion:!0,highlightSelectedWord:!0,autoScrollEditorIntoView:!0,minLines:20,maxLines:d}),l.getSession().setTabSize(parseInt(s)),l.getSession().setUseSoftTabs(!0),l.getSession().setValue(config.options.chkEscapeScriptTags?function(e){const t=new RegExp(&quot;&lt;script&quot;,&quot;g&quot;),o=new RegExp(&quot;&lt;/script&quot;,&quot;g&quot;);return e.replace(t,&quot;// &lt;script&quot;).replace(o,&quot;// &lt;/script&quot;)}(store.getTiddlerText(o)):store.getTiddlerText(o)),l.getSession().setUseWrapMode(!0),l.focus(),l.resize(!0),l.scrollToLine(30,!0,!0,function(){}),l.setFontSize(n);let g=parseInt(store.getValue(o,&quot;acecolumn&quot;,0)),S=parseInt(store.getValue(o,&quot;acerow&quot;,0))+1;l.gotoLine(S,g,!0),l.commands.addCommand({name:&quot;showSettingsMenu&quot;,bindKey:&quot;F2&quot;,exec:function(e){e.showSettingsMenu()},readOnly:!0}),l.commands.addCommand({name:&quot;FontSizePlus&quot;,bindKey:&quot;Ctrl-+&quot;,exec:function(e){const t=parseInt(e.getFontSize())+1;e.setFontSize(t),config.options.txtaceEditFontSize=t,i&amp;&amp;console.log(&quot;font+: &quot;,e.getFontSize())},readOnly:!0}),l.commands.addCommand({name:&quot;FontSizeMin&quot;,bindKey:&quot;Ctrl--&quot;,exec:function(e){const t=parseInt(e.getFontSize())-1;e.setFontSize(t),config.options.txtaceEditFontSize=t,i&amp;&amp;console.log(&quot;font-: &quot;,e.getFontSize())},readOnly:!0})};
 //}}}
 //{{{
 
@@ -963,7 +965,7 @@ ace.define(&quot;ace/mode/doc_comment_highlight_rules&quot;,[&quot;require&quot;
             
 //}}}</pre>
 </div>
-<div title="zzz-Config" modifier="Okido" created="202002021919" modified="202005020915" tags="systemConfig" acecolumn="25" acerow="2" changecount="7">
+<div title="zzz-Config" modifier="Okido" created="202002021919" modified="202005020915" tags="systemConfig" changecount="7" acerow="2" acecolumn="25">
 <pre>/* Options for ace-Plugin.js */
 config.options.chkEscapeScriptTags = true;
 config.options.txtaceEditBoxLines = &quot;50&quot;;
