@@ -1,6 +1,6 @@
 /***
 |Name|ace-Plugin.js |
-|Version|0.0.19 |
+|Version|0.0.20 |
 |Version library|1.4.13 |
 |Description| |
 |Source|ace-Source |
@@ -13,17 +13,17 @@
 
 !!!Documentation
 <<<
-This plugin gives you the ace.js editor in Tiddlywiki classic framework.
+This plugin gives you the ace.js editor for the TiddlyWiki classic framework.
 Versioning numbering follows ace.js versioning followed by number for the plugin version.
 ''Key definition:''
 Open key command menu: F1
 Search: CTRL F
 Search and replace: CTRL H
 Settings menu: F2
-Change fontsize: <nowiki>CTRL+ and CTRL-</nowiki>
+Change font-size: <nowiki>CTRL+ and CTRL-</nowiki>
 Close tiddler: CTRL ENTER
 Double click: select and highlight words
-Javascript snippets show up in a modal box, select with arrow up and down and confirm with TAB
+JavaScript snippets show up in a modal box, select with arrow up and down and confirm with TAB
 <<<
 !!!Usage
 <<<
@@ -56,24 +56,24 @@ Modify ToolbarCommands, it must contain aceEdit and aceSave, like:
 |~EditToolbar|+saveTiddler aceSave -cancelTiddler deleteTiddler|
 
 !!!Choose to escape script tags when editing script code
-<<option chkEscapeScriptTags>> Escape script tags when edited with ace-Plugin.js and InlineJavascriptPlugin.
+<<option chkEscapeScriptTags>> Escape script tags when edited with [[ace-Plugin.js]] and [[InlineJavascriptPlugin]].
 Or add the following code to a tiddler that is tagged with systemConfig.
 {{{
   config.options.chkEscapeScriptTags = true; 
 }}}
-!!!Set the heigth of the edit box
+!!!Set the height of the edit box
 <<option txtaceEditBoxLines>> Set the heigth of edit box in number of lines.
 Or add the following code to a tiddler that is tagged with systemConfig.
 {{{
   config.options.txtaceEditBoxLines = "50"; 
 }}}
-!!!Set the fontsize
+!!!Set the font-size
 <<option txtaceEditFontSize>> Set the fontsize in px.
 Or add the following code to a tiddler that is tagged with systemConfig.
 {{{
   config.options.txtaceEditFontSize = 16; 
 }}}
-!!!Set the number of spaces for softtab
+!!!Set the number of spaces for soft tab
 <<option txtaceEditSoftTab>> Set the number of spaces to use for one tab.
 Or add the following code to a tiddler that is tagged with systemConfig.
 {{{
@@ -82,20 +82,21 @@ Or add the following code to a tiddler that is tagged with systemConfig.
 <<<
 !!!Revisions
 <<<
-28-10-2021 0.0.19 Updated ace.js to version 1.4.13, added persistant codefolding between sessions
+28-10-2021 0.0.20 Fixed typos in the text
+28-10-2021 0.0.19 Updated ace.js to version 1.4.13, added persistent code folding between sessions
 28-03-2021 0.0.18 Switched to the latest build template, added some snippets
-28-11-2020 0.0.17 Double click in aceEdit mode selects a word, story.prototype.onTiddlerDblClick is modfied
+28-11-2020 0.0.17 Double click in aceEdit mode selects a word, story.prototype.onTiddlerDblClick is modified
 20-11-2020 0.0.16 Key combination CTRL ENTER closes a tiddler and keeps the changes
 20-09-2020 0.0.15 Added TWc core snippets
-25-07-2020 0.0.14 Updated ace.js to version 1.4.12, changend versioning numbering to ~TWc style
+25-07-2020 0.0.14 Updated ace.js to version 1.4.12, changed versioning numbering to ~TWc style
 26-06-2020 1.4.10.13 Keep the cursor position and use it when a new edit is started
 08-05-2020 1.4.10.12 Changed the button handlers, to improve speed and to prevent handler conflicts, make sure that aceSave is added to [[ToolbarCommands]]
 04-05-2020 1.4.10.11 Prevented that after aceDone the code is rendered twice
 02-05-2020 1.4.10.10 Updated template, settings were lost
 18-04-2020 1.4.10.9 Updated ace.js to 1.4.10
 10-04-2020 1.4.8.9 Improved performance when switching from edit mode to presentation style, cursor position is stored
-28-03-2020 1.4.8.8 Added feature to change fontsize during editing with <nowiki>CTRL+ and CTRL-</nowiki>
-14-03-2020 1.4.8.7 Fixed Tiddler titles that have a dot or special character, this causes jQuery id's to turn in faulty selectors, fixed wrong edit box placement when several tiddlers are opened for editing, fontsize and softtabs can now be set 
+28-03-2020 1.4.8.8 Added feature to change font-size during editing with <nowiki>CTRL+ and CTRL-</nowiki>
+14-03-2020 1.4.8.7 Fixed Tiddler titles that have a dot or special character, this causes jQuery id's to turn in faulty selectors, fixed wrong edit box placement when several tiddlers are opened for editing, font-size and soft tabs can now be set 
 07-03-2020 1.4.8.6 Added multi sessions to edit multiple open tiddlers at the same time 
 23-02-2020 1.4.8.5 Added functionality to keep the last cursor position and the max height of the edit box can be set
 23-02-2020 1.4.8.4 Improved the configuration instructions, fixed the loss of field values, Reto Stauss thanks for reporting
