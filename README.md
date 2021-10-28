@@ -4,8 +4,7 @@ The plugin instructions are included in the plugin documentation.
 
 Information about the ace.js editor is here: https://ace.c9.io/
 
-Try the ace-Plugin here: https://nwokido.github.io/ace-Plugin.js/
-You cannot save your work.
+Try the ace-Plugin here: https://nwokido.github.io/ace-Plugin.js/, unfortunately you cannot save your work on GitHub, you need to install TiddlyWiki yourself.
 
 TiddlyWiki classic is explained here: https://classic.tiddlywiki.com/
 
