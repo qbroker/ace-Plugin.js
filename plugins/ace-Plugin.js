@@ -1,7 +1,7 @@
 /***
 |Name|ace-Plugin.js |
-|Version|0.0.21 |
-|Version library|1.4.13 |
+|Version|0.0.22 |
+|Version library|1.4.14 |
 |Description| |
 |Source|ace-Source |
 |Documentation| |
@@ -82,6 +82,7 @@ Or add the following code to a tiddler that is tagged with systemConfig.
 <<<
 !!!Revisions
 <<<
+12-02-2022 0.0.22 Updated ace.js to version 1.4.14
 28-10-2021 0.0.20 Fixed typos in the text
 28-10-2021 0.0.19 Updated ace.js to version 1.4.13, added persistent code folding between sessions
 28-03-2021 0.0.18 Switched to the latest build template, added some snippets
