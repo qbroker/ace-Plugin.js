@@ -1,1 +1,2 @@
-ace-Plugin.js.html linguist-language=Javascript
+*.html linguist-language=HTML
+*.js linguist-language=Javascript
