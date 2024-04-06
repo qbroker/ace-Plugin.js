@@ -1,1 +1,1 @@
-# This is the file that can be tried in the browser.
+# This is the file that can be used in the browser for testing.
