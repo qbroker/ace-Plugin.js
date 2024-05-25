@@ -5,8 +5,8 @@
 |Version |0.0.49 |
 |Version library |1.34.1 |
 |Plugin type |systemConfig |
-|Source |https://raw.githubusercontent.com/qbroker/ace-Plugin.js/master/plugins/ace-Plugin.js|
-|Author |Okido |
+|Source |ace-Source |
+|Author |Berry Klomp |
 |Original author | |
 |License |See the license section |
 |Core version |≥2.9.2 |
@@ -149,7 +149,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON A
 !!License for the [[TiddlyWikiClassic]] plugin code
 MIT License
 
-Copyright (c) 2024 Okido
+Copyright (c) 2024 Berry Klomp
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
