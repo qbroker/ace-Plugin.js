@@ -2,6 +2,7 @@
 This plugin provides the [ace.js](https://ace.c9.io/) editor for TiddlyWikiClassic.\
 The plugin instructions are included in the plugin documentation.\
 In this TiddlyWikiClassic you can also find the babel-Plugin.js to transpile JavaScript code to es2015 style JavaScript.
+The JavaScript snippets for ace.js are now provided by the ace-Snippet-Plugin [here](https://github.com/qbroker/ace-Plugin.js/blob/master/plugins/ace-Snippet-Plugin.js)
 
 Information about the ace.js editor can de found [here](https://ace.c9.io/) 
 
